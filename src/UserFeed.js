@@ -1,62 +1,22 @@
 import { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { Context } from './App';
 import VideoFeedItem from './VideoFeedItem';
 import UserInfo from './UserInfo';
 
 const axios = require('axios').default;
 
-// const optionUserFeed = {
-//   method: 'GET',
-//   //   url: 'https://tiktok33.p.rapidapi.com/user/feed/dave.xp',
-//   url: `https://tiktok33.p.rapidapi.com/user/feed/${currentUser}`,
-//   headers: {
-//     'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-//     'x-rapidapi-key': '22a63312d2msha59bc2074f8e5bep1ac1f0jsn985426636d60'
-//   }
-// };
-
-const getUserFeedData = (currentUser) =>
-  axios
-    .request({
-      method: 'GET',
-      //   url: 'https://tiktok33.p.rapidapi.com/user/feed/dave.xp',
-      url: `https://tiktok33.p.rapidapi.com/user/feed/${currentUser}`,
-      headers: {
-        'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-        'x-rapidapi-key': '22a63312d2msha59bc2074f8e5bep1ac1f0jsn985426636d60'
-      }
-    })
-    .then(function (response) {
-      console.log(response.data);
-      return response.data;
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-
-// const optionsUserInfo = {
-//   method: 'GET',
-//   //   url: 'https://tiktok33.p.rapidapi.com/user/info/dave.xp',
-//   url: `https://tiktok33.p.rapidapi.com/user/info/${currentUser}`,
-//   headers: {
-//     'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-//     'x-rapidapi-key': '22a63312d2msha59bc2074f8e5bep1ac1f0jsn985426636d60'
-//   }
-// };
-
 const getUserInfoData = (currentUser) =>
   axios
     .request({
       method: 'GET',
-      //   url: 'https://tiktok33.p.rapidapi.com/user/info/dave.xp',
       url: `https://tiktok33.p.rapidapi.com/user/info/${currentUser}`,
       headers: {
         'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-        'x-rapidapi-key': '22a63312d2msha59bc2074f8e5bep1ac1f0jsn985426636d60'
+        'x-rapidapi-key': 'c1257dc04cmshd888bbb072eb770p1f2b8ajsnbf16d4cd1d66'
       }
     })
     .then(function (response) {
-      // console.log(response.data);
       return response.data;
     })
     .catch(function (error) {
@@ -64,21 +24,30 @@ const getUserInfoData = (currentUser) =>
     });
 
 const UserFeed = () => {
-  const {currentUser} = useContext(Context);
-  const [userFeedServerData, setUserFeedServerData] = useState([]);
+  const { currentUser } = useContext(Context);
+  const params = useParams();
   const [userDataServerData, setUserDataServerData] = useState({});
 
-  useEffect(() => {
-    getUserFeedData(currentUser).then((userFeedData) => {
-      setUserFeedServerData(userFeedData);
-    });
-  }, [currentUser]);
+  const [dummyUserData, setDummyUserData] = useState([]);
 
   useEffect(() => {
-    getUserInfoData(currentUser).then((userInfoData) => {
-      setUserDataServerData(userInfoData);
-    });
-  }, [currentUser]);
+    axios
+      .get('./user-feed.json')
+      .then((res) => {
+        console.log(res.data.itemList);
+        setDummyUserData(res.data.itemList);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    console.log(params.currentUser);
+    if (params.currentUser) {
+      getUserInfoData(params.currentUser).then((userInfoData) => {
+        setUserDataServerData(userInfoData);
+      });
+    }
+  }, [params]);
 
   return (
     <div>
@@ -86,7 +55,7 @@ const UserFeed = () => {
         <p>This is info about user</p>
       </div>
       <UserInfo {...userDataServerData} />
-      <VideoFeedItem userFeedServerData={userFeedServerData} />
+      {dummyUserData && <VideoFeedItem userFeedServerData={dummyUserData} />}
       <p>I am user feed</p>
     </div>
   );
