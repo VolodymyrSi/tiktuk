@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Genesis Front-end School Practice Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Technology used:
 
-## Available Scripts
+- React functional components
+- React hooks: useState, useEffect, useRef
+- React Context
+- React Router
+- Axios
+- Bootstrap
 
-In the project directory, you can run:
+### Details:
 
-### `npm start`
+The web app consists of 2 pages, which are provided by React Router. These are Trending page and user page.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+|| Trending page | User page |
+|-----------| ----------- | ----------- |
+|Access type| homepage | via links |
+|Route| `website.com/` | `website.com/{username}` |
+|Components| Trending feed item | User feed item | User info |
+|Shared state| `isLoading` | `isLoading` |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+|   | Trending feed item   | User feed item  |  User info |
+|---|---|---|---|
+| Components include  | a number of videos based on server data  | 30 videos based on local data  | profile description based on server data |
+| Data source  |  Axios async request | local data stored in `public/user-feed.json`  | Axios async request |
+|  State |  `trendingFeedServerData` |  `dummyUserData`|  `userDataServerData` |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+_**Trending page** is the **home page**. It renders a number of videos based on server data. The data is received with `Axios` async request. The data is placed in a state called `trendingFeedServerData` upon page load with `useEffect` hook._
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ _If **username** or **userimage** is clicked, React Router `Link` element will lead to user page. The URL depends on the username and is in the following format: 'websitename.com/username'. **Any** user profile can be accessed via this link by typing it in URL address bar, so profiles beyond trending page can be visited._
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+_**User feed** page follows the same logics as **trending page**. However, it uses local data stored in `public/user-feed.json` to always display the same video._
 
-### `npm run eject`
+_**Context** stores `isLoading` state which will display Boostrap spinner to notify the user that the content is being fetched from server._
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Styling
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Minimal styling is done with **Bootstrap** classes.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Responsiveness:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The video sections toggle between row and column layout based on user screen size.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Extra detail:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Unused data at `./src/Unused_data/UserFeedServerData.js` stores functionality needed to render real videos from Userpage. It worked before something bad happened to API.
 
-### Code Splitting
+- `Helper` function stored in `utils` folder uses a regular expression to add commas to likes and comments counters.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Future ideas:
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] Grid layout for desktop with 3 videos per row
+- [ ] Improved styling
