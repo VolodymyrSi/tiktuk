@@ -1,40 +1,35 @@
-// import { useContext } from 'react';
-// import { Context } from './App';
 import { Link } from 'react-router-dom';
 import { numberWithCommas } from '../utils/Helper';
 
 const TrendingFeedItem = ({ trendingFeedServerData }) => {
-  // const { setCurrentUser, currentUser } = useContext(Context);
   return (
     <div className="bg-dark">
       {trendingFeedServerData.map((data) => (
         <div
           key={data.id}
-          className="card bg-dark text-light flex-lg-row flex-md-row flex-sm-column"
+          className="card bg-dark text-light flex-lg-row flex-md-column flex-sm-column align-items-md-center align-items-sm-center"
         >
-          <video
-            className="m-5"
-            controls
-            width={data.videoMeta.width}
-            height={data.videoMeta.height}
-            src={data.videoUrl}
-            frameBorder="0"
-            allowFullScreen
-            title="Embedded video"
-            onMouseOver={(event) => {
-              event.target.muted = true;
-              event.target.play();
-            }}
-            onMouseOut={(event) => event.target.pause()}
-          />
-          {/* <Link to={'/' + data.authorMeta.nickName}> */}
-          <div className="flex-column d-flex justify-content-center align-items-center">
+          <div style={{ textAlign: 'center' }}>
+            <video
+              className="m-lg-5"
+              controls
+              width={data.videoMeta.width / 2}
+              height={data.videoMeta.height / 2}
+              src={data.videoUrl}
+              frameBorder="0"
+              allowFullScreen
+              title="Embedded video"
+            />
+          </div>
+          <div
+            className="flex-column d-flex justify-content-center align-items-center"
+            style={{ width: '100%' }}
+          >
             <h2 className="card-title text-center mb-2 ">{data.text}</h2>
-            <Link to={'/' + data.authorMeta.nickName}>
+            <Link to={'/' + data.authorMeta.name}>
               {' '}
               <div
                 className="userData mt-2 mb-2 text-center"
-                // onClick={() => setCurrentUser(data.authorMeta.nickName)}
               >
                 <img
                   style={{

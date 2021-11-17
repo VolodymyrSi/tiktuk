@@ -7,8 +7,9 @@ import { userApi } from '../api-config/api';
 
 const axios = require('axios').default;
 
-const getUserInfoData = (currentUser) =>
-  axios
+const getUserInfoData = (currentUser) => {
+  console.log(currentUser);
+  return axios
     .request({
       method: 'GET',
       url: `https://tiktok33.p.rapidapi.com/user/info/${currentUser}`,
@@ -23,9 +24,9 @@ const getUserInfoData = (currentUser) =>
     .catch(function (error) {
       console.error(error);
     });
+};
 
 const UserFeed = () => {
-  const { currentUser } = useContext(Context);
   const { setIsLoading, isLoading } = useContext(Context);
   const params = useParams();
   const [userDataServerData, setUserDataServerData] = useState({});
@@ -36,17 +37,18 @@ const UserFeed = () => {
     axios
       .get('./user-feed.json')
       .then((res) => {
-        console.log(res.data.itemList);
         setDummyUserData(res.data.itemList);
       })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    // console.log(params.currentUser);
     if (!isLoading) {
-      setIsLoading(true)
+      setIsLoading(true);
     }
+  }, []);
+
+  useEffect(() => {
     if (params.currentUser) {
       getUserInfoData(params.currentUser).then((userInfoData) => {
         setUserDataServerData(userInfoData);
@@ -57,8 +59,7 @@ const UserFeed = () => {
 
   return (
     <div>
-      {/* <UserInfo {...userDataServerData} /> */}
-      <UserInfo userData={userDataServerData} />
+      <UserInfo {...userDataServerData} />
       {dummyUserData && (
         <VideoFeedItem userFeedServerData={dummyUserData.slice(0, 29)} />
       )}

@@ -1,35 +1,29 @@
-// const UserInfo = ({ user, stats}) => {
-//     console.log(user, stats);
-//   return (
-//     <div>
-//       {user && (
-//         <div>
-//           <h2>{user.nickname}</h2>
-//           <img src={user.avatarLarger} alt={user.nickname} />
-//           {/* <a href={user.bioLink.link}>{user.bioLink.link}</a> */}
-//         </div>
-//       )}
+import { numberWithCommas } from '../utils/Helper';
 
-//       {stats && (
-//         <div>
-//           <p>{`Followers: ${stats.followerCount}`}</p>
-//           <p>{`Following: ${stats.followingCount}`}</p>
-//           <p>{`Total likes: ${stats.heartCount}`}</p>
-//           <p>{`Total videos: ${stats.videoCount}`}</p>
-//         </div>
-//       )}
-//       <p>I am user info</p>
-//     </div>
-//   );
-// };
-
-const UserInfo = (props) => {
-  console.log(props);
+const UserInfo = ({ user, stats }) => {
   return (
-    <div>
-      <p>I am user info</p>
+    <div className="bg-dark text-light d-flex align-items-center justify-content-center p-3">
+      {user && (
+        <div>
+          <h2 className="text-center">{user.nickname}</h2>
+          <img
+            style={{ width: 200 }}
+            src={user.avatarLarger}
+            alt={user.nickname}
+          />
+        </div>
+      )}
+      {stats && (
+        <div className="ml-3">
+          <p>{`⬅️ Followers: ${numberWithCommas(stats.followerCount)}`}</p>
+          <p>{`➡️ Following: ${numberWithCommas(stats.followingCount)}`}</p>
+          <p>{`❤️ Total likes: ${numberWithCommas(stats.heartCount)}`}</p>
+          <p>{`🎥 Total videos: ${numberWithCommas(stats.videoCount)}`}</p>
+        </div>
+      )}
     </div>
   );
 };
+
 
 export default UserInfo;

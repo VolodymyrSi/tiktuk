@@ -9,10 +9,9 @@ import * as ReactBootStrap from 'react-bootstrap';
 export const Context = createContext();
 
 function App() {
-  const [currentUser, setCurrentUser] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   return (
-    <Context.Provider value={{ currentUser, setCurrentUser, setIsLoading }}>
+    <Context.Provider value={{ isLoading, setIsLoading }}>
       <div className="App">
         <Routes>
           <Route path="/" element={<TrendingFeed />} />

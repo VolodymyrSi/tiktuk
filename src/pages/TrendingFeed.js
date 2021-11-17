@@ -18,7 +18,6 @@ const getTrendingFeedData = () =>
   axios
     .request(options)
     .then(function (response) {
-      // console.log(response.data);
       return response.data;
     })
     .catch(function (error) {
@@ -27,18 +26,16 @@ const getTrendingFeedData = () =>
 
 const TrendingFeed = () => {
   const { setIsLoading, isLoading } = useContext(Context);
-  // setIsLoading(true);
   const [trendingFeedServerData, setTrendingFeedServerData] = useState([]);
 
   useEffect(() => {
     if (!isLoading) {
-      setIsLoading(true)
+      setIsLoading(true);
     }
     getTrendingFeedData().then((trendingFeedData) => {
       setTrendingFeedServerData(trendingFeedData);
       setIsLoading(false);
     });
-    // return () => setIsLoading(false);
   }, []);
 
   return (
