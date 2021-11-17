@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '../App';
-import VideoFeedItem from '../components/VideoFeedItem';
+import VideoFeedItem from '../components/UserFeedItem';
 import UserInfo from '../components/UserInfo';
 import { userApi } from '../api-config/api';
 
@@ -46,6 +46,7 @@ const UserFeed = () => {
     if (!isLoading) {
       setIsLoading(true);
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const UserFeed = () => {
         setIsLoading(false);
       });
     }
+    // eslint-disable-next-line
   }, [params]);
 
   return (
