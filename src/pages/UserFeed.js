@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { Context } from './App';
-import VideoFeedItem from './VideoFeedItem';
-import UserInfo from './UserInfo';
+import { Context } from '../App';
+import VideoFeedItem from '../components/VideoFeedItem';
+import UserInfo from '../components/UserInfo';
+import { userApi } from '../api-config/api';
 
 const axios = require('axios').default;
 
@@ -13,7 +14,7 @@ const getUserInfoData = (currentUser) =>
       url: `https://tiktok33.p.rapidapi.com/user/info/${currentUser}`,
       headers: {
         'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-        'x-rapidapi-key': 'c1257dc04cmshd888bbb072eb770p1f2b8ajsnbf16d4cd1d66'
+        'x-rapidapi-key': userApi
       }
     })
     .then(function (response) {
@@ -25,6 +26,7 @@ const getUserInfoData = (currentUser) =>
 
 const UserFeed = () => {
   const { currentUser } = useContext(Context);
+  const { setIsLoading, isLoading } = useContext(Context);
   const params = useParams();
   const [userDataServerData, setUserDataServerData] = useState({});
 
@@ -41,22 +43,25 @@ const UserFeed = () => {
   }, []);
 
   useEffect(() => {
-    console.log(params.currentUser);
+    // console.log(params.currentUser);
+    if (!isLoading) {
+      setIsLoading(true)
+    }
     if (params.currentUser) {
       getUserInfoData(params.currentUser).then((userInfoData) => {
         setUserDataServerData(userInfoData);
+        setIsLoading(false);
       });
     }
   }, [params]);
 
   return (
     <div>
-      <div>
-        <p>This is info about user</p>
-      </div>
-      <UserInfo {...userDataServerData} />
-      {dummyUserData && <VideoFeedItem userFeedServerData={dummyUserData} />}
-      <p>I am user feed</p>
+      {/* <UserInfo {...userDataServerData} /> */}
+      <UserInfo userData={userDataServerData} />
+      {dummyUserData && (
+        <VideoFeedItem userFeedServerData={dummyUserData.slice(0, 29)} />
+      )}
     </div>
   );
 };

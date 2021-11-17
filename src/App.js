@@ -2,8 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, createContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import UserFeed from './UserFeed';
-import TrendingFeed from './TrendingFeed';
+import UserFeed from './pages/UserFeed';
+import TrendingFeed from './pages/TrendingFeed';
 import * as ReactBootStrap from 'react-bootstrap';
 
 export const Context = createContext();
