@@ -3,7 +3,7 @@
 ### Technology used:
 
 - React functional components
-- React hooks: useState, useEffect, useRef
+- React hooks: useState, useEffect
 - React Context
 - React Router
 - Axios
