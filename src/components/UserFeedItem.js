@@ -1,4 +1,4 @@
-import { numberWithCommas } from '../utils/Helper';
+import { numberWithCommas } from "../utils/Helper";
 
 const VideoFeedItem = ({ userFeedServerData }) => {
   return (
@@ -8,7 +8,7 @@ const VideoFeedItem = ({ userFeedServerData }) => {
           key={data.id}
           className="card bg-dark text-light flex-lg-row flex-md-column flex-sm-column align-items-md-center align-items-sm-center"
         >
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: "center" }}>
             <video
               className="m-lg-5"
               controls
@@ -22,31 +22,31 @@ const VideoFeedItem = ({ userFeedServerData }) => {
           </div>
           <div
             className="flex-column d-flex justify-content-center align-items-center"
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
           >
             <h2 className="card-title text-center mb-2 ">{data.desc}</h2>
             <div className="userData mt-2 mb-2 text-center">
               <img
                 style={{
-                  display: 'inline',
+                  display: "inline",
                   width: 60,
-                  height: 'auto',
-                  marginRight: 10
+                  height: "auto",
+                  marginRight: 10,
                 }}
                 className="rounded"
                 src={data.author.avatarThumb}
                 alt={data.author.nickname}
               />
-              <h3 style={{ display: 'inline' }} className="text-light">
+              <h3 style={{ display: "inline" }} className="text-light">
                 {data.author.nickname}
               </h3>
             </div>
             <div className="videoStats text-secondary mt-3">
-              <h4>{'❤️ Likes: ' + numberWithCommas(data.stats.diggCount)}</h4>
+              <h4>{"❤️ Likes: " + numberWithCommas(data.stats.diggCount)}</h4>
               <h4>
-                {'💭 Comments: ' + numberWithCommas(data.stats.commentCount)}
+                {"💭 Comments: " + numberWithCommas(data.stats.commentCount)}
               </h4>
-              <h4>{'📺 Views: ' + data.stats.playCount}</h4>
+              <h4>{"📺 Views: " + data.stats.playCount}</h4>
             </div>
           </div>
         </div>

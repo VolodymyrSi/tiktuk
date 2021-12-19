@@ -1,4 +1,4 @@
-import { numberWithCommas } from '../utils/Helper';
+import { numberWithCommas } from "../utils/Helper";
 
 const UserInfo = ({ user, stats }) => {
   return (
@@ -24,6 +24,5 @@ const UserInfo = ({ user, stats }) => {
     </div>
   );
 };
-
 
 export default UserInfo;

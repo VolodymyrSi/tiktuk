@@ -1,22 +1,22 @@
-import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { Context } from '../App';
-import VideoFeedItem from '../components/UserFeedItem';
-import UserInfo from '../components/UserInfo';
-import { userApi } from '../api-config/api';
+import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { Context } from "../App";
+import VideoFeedItem from "../components/UserFeedItem";
+import UserInfo from "../components/UserInfo";
+import { userApi } from "../api-config/api";
 
-const axios = require('axios').default;
+const axios = require("axios").default;
 
 const getUserInfoData = (currentUser) => {
   console.log(currentUser);
   return axios
     .request({
-      method: 'GET',
+      method: "GET",
       url: `https://tiktok33.p.rapidapi.com/user/info/${currentUser}`,
       headers: {
-        'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
-        'x-rapidapi-key': userApi
-      }
+        "x-rapidapi-host": "tiktok33.p.rapidapi.com",
+        "x-rapidapi-key": userApi,
+      },
     })
     .then(function (response) {
       return response.data;
@@ -35,7 +35,7 @@ const UserFeed = () => {
 
   useEffect(() => {
     axios
-      .get('./user-feed.json')
+      .get("./user-feed.json")
       .then((res) => {
         setDummyUserData(res.data.itemList);
       })
