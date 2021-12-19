@@ -1,4 +1,5 @@
-import { numberWithCommas } from "../utils/Helper";
+import PropTypes from 'prop-types';
+import { numberWithCommas } from '../utils/Helper';
 
 const UserInfo = ({ user, stats }) => {
   return (
@@ -23,6 +24,23 @@ const UserInfo = ({ user, stats }) => {
       )}
     </div>
   );
+};
+
+UserInfo.propTypes = {
+  user: PropTypes.arrayOf(
+    PropTypes.shape({
+      avatarLarger: PropTypes.string.isRequired,
+      nickname: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  stats: PropTypes.arrayOf(
+    PropTypes.shape({
+      followerCount: PropTypes.string.isRequired,
+      followingCount: PropTypes.string.isRequired,
+      heartCount: PropTypes.string.isRequired,
+      videoCount: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default UserInfo;

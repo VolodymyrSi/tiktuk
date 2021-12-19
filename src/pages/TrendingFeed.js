@@ -1,17 +1,16 @@
-import { useState, useEffect, useContext } from "react";
-import { Context } from "../App";
-import TrendingFeedItem from "../components/TrendingFeedItem";
-import { userApi } from "../api-config/api";
-
-const axios = require("axios").default;
+import axios from 'axios';
+import { useState, useEffect, useContext } from 'react';
+import { Context } from '../App';
+import TrendingFeedItem from '../components/TrendingFeedItem';
+import { userApi } from '../api-config/api';
 
 const options = {
-  method: "GET",
-  url: "https://tiktok33.p.rapidapi.com/trending/feed",
+  method: 'GET',
+  url: 'https://tiktok33.p.rapidapi.com/trending/feed',
   headers: {
-    "x-rapidapi-host": "tiktok33.p.rapidapi.com",
-    "x-rapidapi-key": userApi,
-  },
+    'x-rapidapi-host': 'tiktok33.p.rapidapi.com',
+    'x-rapidapi-key': userApi
+  }
 };
 
 const getTrendingFeedData = () =>
